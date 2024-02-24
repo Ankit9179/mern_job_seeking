@@ -24,9 +24,9 @@ app.use(express.json()); // parse the json data in javascript from frontedn
 app.use(express.urlencoded({ extended: true }));
 
 //use routers
-app.use("/api/vi/user", userRouter);
-app.use("/api/vi/job", jobRouter);
-app.use("/api/vi/application", applicationRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/job", jobRouter);
+app.use("/api/v1/application", applicationRouter);
 
 //mongo connection
 dbConnection();
