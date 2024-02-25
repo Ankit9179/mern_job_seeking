@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -37,14 +38,22 @@ const userSchema = new mongoose.Schema({
 
 //hash password
 userSchema.pre("save", async function (next) {
-  try {
-    const solt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, solt);
-    this.password = hashedPassword;
+  if (!this.isModified("password")) {
     next();
-  } catch (error) {
-    next(error);
   }
+  this.password = await bcrypt.hash(this.password, 10);
 });
+
+//compare password function
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+//generateToken function
+userSchema.methods.geJwtToken = function () {
+  return jwt.sign({ id: this.id }, process.env.JWT_SECRET_KEY, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
 
 export const userModel = mongoose.model("User", userSchema);
