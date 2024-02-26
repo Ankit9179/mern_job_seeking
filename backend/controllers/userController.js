@@ -86,3 +86,14 @@ export const userLogin = async (req, res) => {
     console.log(`error while login function ${error}`);
   }
 };
+
+//user logout
+export const userLogout = (req, res, next) => {
+  res
+    .status(201)
+    .cookie("jwtToken", "", { httpOnly: true, expires: new Date(Date.now()) })
+    .json({
+      success: false,
+      message: "user logout successfuly",
+    });
+};

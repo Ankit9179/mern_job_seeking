@@ -7,6 +7,7 @@ import jobRouter from "./routes/jobRouter.js";
 import applicationRouter from "./routes/applicationRouter.js";
 //import mongodata connection
 import { dbConnection } from "./database/dbConnection.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(
 
 //
 app.use(express.json()); // parse the json data in javascript from frontedn
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 //use routers
