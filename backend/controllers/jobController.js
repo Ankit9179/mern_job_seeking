@@ -129,3 +129,35 @@ export const updateJobFunc = async (req, res) => {
     console.log(`some error while trying to update my job ${error}`);
   }
 };
+
+//delete job
+export const deleteJobFunc = async (req, res) => {
+  try {
+    //get role
+    const { role } = req.user; //is't comming from auth folder for getting only role
+    if (role === "Job_Seeker") {
+      res.status(400).send({
+        success: false,
+        message: "Job seeker can't update a job",
+      });
+    }
+    //get id from parms
+    const { id } = req.params;
+    console.log(id);
+    let job = await jobModel.findById(id);
+    if (!job) {
+      res.status(404).json({
+        success: false,
+        message: "oops job not found",
+      });
+    }
+    //delete job
+    await jobModel.deleteOne();
+    res.status(200).json({
+      success: true,
+      message: "job deleted successfully",
+    });
+  } catch (error) {
+    console.log(`some error while trying to delete my job ${error}`);
+  }
+};

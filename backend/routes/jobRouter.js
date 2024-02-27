@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createJobFunc,
+  deleteJobFunc,
   getAllJobFunc,
   getMyJobsFunc,
   updateJobFunc,
@@ -19,5 +20,6 @@ router.post("/job_create", isAuthorized, createJobFunc);
 router.get("/my_jobs", isAuthorized, getMyJobsFunc);
 // job updates
 router.put("/update_job/:id", isAuthorized, updateJobFunc);
-
+//job delete
+router.delete("/delete_job/:id", isAuthorized, deleteJobFunc);
 export default router;
