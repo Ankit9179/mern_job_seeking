@@ -79,3 +79,16 @@ export const createJobFunc = async (req, res) => {
     console.log(`some error occured while creating post ${error}`);
   }
 };
+
+//get my job
+export const getMyJobs = async (req, res) => {
+  try {
+    const myjobs = await jobModel.find({ postedBy: req.user._id });
+    res.status(200).json({
+      success: true,
+      myjobs,
+    });
+  } catch (error) {
+    console.log(`some error while trying to get my job ${error}`);
+  }
+};
