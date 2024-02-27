@@ -81,7 +81,7 @@ export const createJobFunc = async (req, res) => {
 };
 
 //get my job
-export const getMyJobs = async (req, res) => {
+export const getMyJobsFunc = async (req, res) => {
   try {
     const myjobs = await jobModel.find({ postedBy: req.user._id });
     res.status(200).json({
@@ -90,5 +90,42 @@ export const getMyJobs = async (req, res) => {
     });
   } catch (error) {
     console.log(`some error while trying to get my job ${error}`);
+  }
+};
+
+//Update  job
+export const updateJobFunc = async (req, res) => {
+  try {
+    //get role
+    const { role } = req.user; //is't comming from auth folder for getting only role
+    if (role === "Job_Seeker") {
+      res.status(400).send({
+        success: false,
+        message: "Job seeker can't update a job",
+      });
+    }
+    //get id from parms
+    const { id } = req.params;
+    console.log(id);
+    let job = await jobModel.findById(id);
+    if (!job) {
+      res.status(404).json({
+        success: false,
+        message: "oops job not found",
+      });
+    }
+    //job update
+    job = await jobModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
+    res.status(200).json({
+      success: true,
+      message: "job updated successfully",
+      job,
+    });
+  } catch (error) {
+    console.log(`some error while trying to update my job ${error}`);
   }
 };
