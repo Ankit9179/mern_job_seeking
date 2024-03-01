@@ -1,7 +1,7 @@
 import { applicationModel } from "../model/applicationSchema.js";
 
 //geting all application for employer
-export const getAllApplicatonsFunc = async (req, res) => {
+export const getAllEmployerApplicatonsFunc = async (req, res) => {
   try {
     //geting role of user
     const { role } = req.user;
