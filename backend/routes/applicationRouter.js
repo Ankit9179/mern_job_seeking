@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteJobSeekerApplicationFunc,
   getAllEmployerApplicatonsFunc,
   getAllJobSeekerApplicatonsFunc,
 } from "../controllers/applicationconroller.js";
@@ -19,6 +20,12 @@ router.get(
   "/job_seeker/get_applicatons",
   isAuthorized,
   getAllJobSeekerApplicatonsFunc
+);
+//get all applications routs
+router.delete(
+  "/job_seeker/delete_job_application/:id",
+  isAuthorized,
+  deleteJobSeekerApplicationFunc
 );
 
 export default router;
