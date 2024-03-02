@@ -1,4 +1,6 @@
 import { applicationModel } from "../model/applicationSchema.js";
+import cloudinary from "cloudinary";
+import { jobModel } from "../model/jobSchema.js";
 
 //geting all application for employer
 export const getAllEmployerApplicatonsFunc = async (req, res) => {
@@ -13,6 +15,7 @@ export const getAllEmployerApplicatonsFunc = async (req, res) => {
     }
     //geting user id of user
     const { _id } = req.user;
+    console.log(_id);
     const application = await applicationModel.find({ employerId: _id });
     res.status(200).json({
       success: true,
@@ -20,7 +23,7 @@ export const getAllEmployerApplicatonsFunc = async (req, res) => {
     });
   } catch (error) {
     console.log(
-      `some error while you are trying to get All jobs from conntroller ${error}`
+      `some error while you are trying to get All application from conntroller ${error}`
     );
   }
 };
@@ -80,6 +83,113 @@ export const deleteJobSeekerApplicationFunc = async (req, res) => {
   } catch (error) {
     console.log(
       `some error while trying to delete job seeker application ${error}`
+    );
+  }
+};
+
+//create application
+export const createApplicationFunc = async (req, res) => {
+  try {
+    //geting role of user
+    const { role } = req.user;
+    if (role === "Employer") {
+      res.status(400).send({
+        success: false,
+        message: "Employer can't  create application",
+      });
+    }
+    // chek file from req for resume
+    if (!req.files || Object.keys(req.files) === 0) {
+      res.status(400).send({
+        success: false,
+        message: "please provide resume",
+      });
+    }
+    //geting resume form
+    const { resume } = req.files;
+    console.log(resume);
+    const allFormats = ["image/png", "image/jpeg", "image/webp"];
+    if (!allFormats.includes(resume.mimetype)) {
+      res.status(400).send({
+        success: false,
+        message: "please provide your resume in a .png , .jpg or .webp formate",
+      });
+      return;
+    }
+    //req for cloudinary
+    const cloudinaryResponse = await cloudinary.uploader.upload(
+      resume.tempFilePath
+    );
+    if (!cloudinaryResponse || cloudinaryResponse.error) {
+      res.status(500).send({
+        success: false,
+        message:
+          "some error occurd, trying to cloudinary response resume upload",
+      });
+    }
+    //get some fields  || jobId for cheking job know expireing date for job
+    const { name, email, coverLetter, phone, address, jobId } = req.body;
+    if (!jobId) {
+      res.status(404).send({
+        success: false,
+        message: "job not found",
+      });
+    }
+    //gettting applicant id
+    const applicantId = {
+      user: req.user._id,
+      role: "Job_Seeker",
+    };
+    //getting job
+    const jobInfo = await jobModel.findById(jobId);
+    if (!jobInfo) {
+      res.status(400).send({
+        success: false,
+        message: "some error occurd, trying to jobinfo",
+      });
+    }
+    //getting employer id
+    const employerId = {
+      user: jobInfo.postedBy,
+      role: "Employer",
+    };
+    if (
+      !name ||
+      !email ||
+      !coverLetter ||
+      !phone ||
+      !address ||
+      !applicantId ||
+      !employerId ||
+      !resume
+    ) {
+      res.status(400).send({
+        success: false,
+        message: "all fields are required",
+      });
+    }
+    //create post
+    const application = await applicationModel.create({
+      name,
+      email,
+      coverLetter,
+      phone,
+      address,
+      applicantId,
+      employerId,
+      resume: {
+        public_id: cloudinaryResponse.public_id,
+        url: cloudinaryResponse.secure_url,
+      },
+    });
+    res.status(201).send({
+      success: true,
+      message: "application successfully created",
+      application,
+    });
+  } catch (error) {
+    console.log(
+      `some error getting while trying to creating a applicationnn ${error}`
     );
   }
 };

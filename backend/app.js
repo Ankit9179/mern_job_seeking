@@ -8,6 +8,7 @@ import applicationRouter from "./routes/applicationRouter.js";
 //import mongodata connection
 import { dbConnection } from "./database/dbConnection.js";
 import cookieParser from "cookie-parser";
+import fileUpload from "express-fileupload";
 
 const app = express();
 dotenv.config();
@@ -24,6 +25,13 @@ app.use(
 app.use(express.json()); // parse the json data in javascript from frontedn
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+//user file upload
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 //use routers
 app.use("/api/v1/user", userRouter);

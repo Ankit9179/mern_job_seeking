@@ -3,6 +3,7 @@ import {
   deleteJobSeekerApplicationFunc,
   getAllEmployerApplicatonsFunc,
   getAllJobSeekerApplicatonsFunc,
+  createApplicationFunc,
 } from "../controllers/applicationconroller.js";
 import { isAuthorized } from "../auth/isAuthentication.js";
 
@@ -26,6 +27,12 @@ router.delete(
   "/job_seeker/delete_job_application/:id",
   isAuthorized,
   deleteJobSeekerApplicationFunc
+);
+//create applications routs
+router.post(
+  "/job_seeker/create_application",
+  isAuthorized,
+  createApplicationFunc
 );
 
 export default router;
