@@ -97,3 +97,16 @@ export const userLogout = (req, res, next) => {
       message: "user logout successfuly",
     });
 };
+
+//get user
+export const getUser = async (req, res) => {
+  try {
+    const user = req.user;
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.log(`error while i am trying to get user`);
+  }
+};
