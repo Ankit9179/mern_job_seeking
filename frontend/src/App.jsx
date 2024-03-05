@@ -8,6 +8,7 @@ import Register from './components/Auth/Register'
 import Application from './components/Applications/Application'
 import MyApplication from './components/Applications/MyApplication'
 import JobDetails from './components/Jobs/JobDetails'
+import Home from './components/Home/HomeComponent'
 import JobConponent from './components/Jobs/JobConponent'
 import Myjobs from './components/Jobs/Myjobs'
 import PostJobs from './components/Jobs/PostJobs'
@@ -21,6 +22,7 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/job/getall' element={<JobConponent />} />
