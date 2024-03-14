@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Register.css'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
@@ -61,7 +61,7 @@ const Register = () => {
                                 <option value="Employer">Employer</option>
                             </select>
                         </label>
-                        <span>already user Login here</span>
+                        <Link to={'/login'}>already user Login here</Link>
                         <button>REGISTER</button>
                     </form>
                 </div>
