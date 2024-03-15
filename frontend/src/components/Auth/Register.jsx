@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Register.css'
+import './CommonLoginRegister.css'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'

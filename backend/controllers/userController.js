@@ -44,7 +44,7 @@ export const userLogin = async (req, res) => {
     if (!email || !password || !role) {
       res.status(400).send({
         success: false,
-        message: "provide email password & role",
+        message: "please fill all field",
       });
     }
     //verify email
@@ -53,7 +53,7 @@ export const userLogin = async (req, res) => {
     if (!user) {
       res.status(400).send({
         success: false,
-        message: "provide valid email",
+        message: "please provide valid email",
       });
     }
     //compare password
@@ -80,7 +80,7 @@ export const userLogin = async (req, res) => {
     });
     res.status(200).send({
       success: true,
-      message: "user logdin",
+      message: "user logdin successfully",
     });
   } catch (error) {
     console.log(`error while login function ${error}`);

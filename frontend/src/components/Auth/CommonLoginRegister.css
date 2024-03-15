@@ -55,4 +55,13 @@
     text-align: center;
     text-decoration: none;
   }
+  /*hover on link*/
+  .form a:hover{
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    text-align: center;
+    text-decoration: none;
+    color: orangered;
+  }
   
