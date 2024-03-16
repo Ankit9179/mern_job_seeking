@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { Context } from './StateData' //state data 
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -17,6 +18,24 @@ import Navbar from './components/Layout/Navbar'
 import NoteFound from './components/Notefound/NotfoundComponent'
 
 const App = () => {
+  //state data use 
+  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context)
+
+  // fetchin user with useEffect 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/user/user")
+        setUser(response.data.user)
+        setIsAuthorized(true)
+      } catch (error) {
+        console.log(error)
+        setIsAuthorized(false)
+      }
+    }
+    fetchUser();
+
+  }, [isAuthorized]);
   return (
     <>
       <Router>

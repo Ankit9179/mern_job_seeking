@@ -1,17 +1,37 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
+import { Context } from '../../StateData'
+import { useContext } from 'react'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
-    //is loggedin
-    const [user, serUser] = useState(false)
+    //for usenavigation 
+    const navigate = useNavigate()
+    //isAuthorized state
+    const { isAuthorized, setIsAuthorized } = useContext(Context)
+
+    //handle logout function 
+    const handleLogout = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/api/v1/user/logout")
+            toast.success(response.data.message)
+            setIsAuthorized(false)
+            navigate('/login')
+        } catch (error) {
+            console.log(error)
+            setIsAuthorized(true)
+        }
+    }
+
     return (
         <>
             <div className="container">
                 <div className="nav">
                     <img className='nav_logo' src="https://t3.ftcdn.net/jpg/03/69/72/20/360_F_369722049_bbw8XbPujH5bm5nxlYpRXcKz0DKmLC2m.jpg" alt="nav logo" />
                     {
-                        user ?
+                        isAuthorized ?
                             <ul>
                                 <li>
                                     <Link to='/'>HOME</Link>
@@ -29,7 +49,7 @@ const Navbar = () => {
                                     <Link to="/job/my">VIEW YOUR JOB</Link>
                                 </li>
                                 <li>
-                                    <Link>LOGOUT</Link>
+                                    <Link onClick={handleLogout}>LOGOUT</Link>
                                 </li>
                             </ul> :
                             <ul>
