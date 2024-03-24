@@ -42,16 +42,16 @@ export const userLogin = async (req, res) => {
   try {
     const { email, password, role } = req.body;
     if (!email || !password || !role) {
-      res.status(400).send({
+      return res.status(404).send({
         success: false,
-        message: "please fill all field",
+        message: "user logged in successfully",
       });
     }
     //verify email
     const user = await userModel.findOne({ email: email }).select("+password");
-    console.log(user);
+    console.log(`${user} from here`);
     if (!user) {
-      res.status(400).send({
+      return res.status(400).send({
         success: false,
         message: "please provide valid email",
       });
@@ -59,31 +59,31 @@ export const userLogin = async (req, res) => {
     //compare password
     const isPasswordMatched = await user.comparePassword(password);
     if (!isPasswordMatched) {
-      res.status(400).send({
+      return res.status(400).send({
         success: false,
         message: "your password not matched",
       });
     }
     //check role
     if (user.role !== role) {
-      res.status(400).send({
+      return res.status(400).send({
         success: false,
         message: "user not found with this role",
       });
     }
-    //generate token
+    // generate token
     const token = await user.geJwtToken();
     //save token in cookie and send
-    res.cookie("jwtToken", token, {
-      expires: new Date(Date.now() + 25892000000), //valid for 1 month
-      httpOnly: true,
-    });
-    res.status(200).send({
+    res.cookie("token", token).status(200).send({
       success: true,
       message: "user logdin successfully",
     });
   } catch (error) {
-    console.log(`error while login function ${error}`);
+    console.error(`Error while login function: ${error}`);
+    res.status(500).send({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 

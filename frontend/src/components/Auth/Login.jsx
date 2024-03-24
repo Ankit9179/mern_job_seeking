@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './CommonLoginRegister.css'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Context } from '../../StateData'
 
 
 
@@ -11,6 +12,9 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [role, setRole] = useState("")
+
+    //use context 
+    const { isAuthorized, setIsAuthorized } = useContext(Context)
 
     //use navigate to navigation to home page
     const navigate = useNavigate()
@@ -21,16 +25,21 @@ const Login = () => {
         e.preventDefault()
         let FormData = { email, password, role }
         try {
-            const response = await axios.post("http://localhost:8080/api/v1/user/login", FormData)
+            const response = await axios.post("http://localhost:8080/api/v1/user/login", FormData, {
+                headers: { "Content-Type": "application/json" }
+            })
             toast.success(`${response.data.message}`) //
-            console.log(response)
+            setIsAuthorized(true)
             //redirect to login page
             navigate('/')
         } catch (error) {
             toast.error(`${error.response.data.message}`)
         }
     }
-
+    //check autorize
+    if (isAuthorized) {
+        return <Navigate to={'/'} />
+    }
     return (
         <>
             <div className="register_container">
@@ -48,7 +57,7 @@ const Login = () => {
                         </label>
 
                         <label>Your Role :
-                            <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
+                            <select name="role" value={role} required onChange={(e) => setRole(e.target.value)}>
                                 <option></option>
                                 <option value="Job_Seeker">Job Seeker</option>
                                 <option value="Employer">Employer</option>

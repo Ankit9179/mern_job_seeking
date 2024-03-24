@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Context } from './StateData' //state data 
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom'
 //imports all components
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
@@ -21,21 +21,23 @@ const App = () => {
   //state data use 
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context)
 
-  // fetchin user with useEffect 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/api/v1/user/user")
-        setUser(response.data.user)
-        setIsAuthorized(true)
-      } catch (error) {
-        console.log(error)
-        setIsAuthorized(false)
-      }
-    }
-    fetchUser();
+  // // fetchin user with useEffect 
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:8080/api/v1/user/user")
+  //       console.log(response)
+  //       setUser(response.data.user)
+  //       setIsAuthorized(true)
+  //     } catch (error) {
+  //       console.log(error.response.data.message)
+  //       setIsAuthorized(false)
+  //     }
+  //   }
+  //   fetchUser();
 
-  }, [isAuthorized]);
+  // }, [isAuthorized]);
+
   return (
     <>
       <Router>

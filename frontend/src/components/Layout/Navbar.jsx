@@ -11,7 +11,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     //isAuthorized state
     const { isAuthorized, setIsAuthorized } = useContext(Context)
-
+    console.log(isAuthorized)
     //handle logout function 
     const handleLogout = async () => {
         try {
