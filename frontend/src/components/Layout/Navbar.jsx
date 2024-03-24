@@ -15,8 +15,8 @@ const Navbar = () => {
     //handle logout function 
     const handleLogout = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/user/logout")
-            toast.success(response.data.message)
+            // const response = await axios.get("http://localhost:8080/api/v1/user/logout")
+            // toast.success(response.data.message)
             setIsAuthorized(false)
             navigate('/login')
         } catch (error) {
@@ -49,7 +49,7 @@ const Navbar = () => {
                                     <Link to="/job/my">VIEW YOUR JOB</Link>
                                 </li>
                                 <li>
-                                    <Link onClick={handleLogout}>LOGOUT</Link>
+                                    <Link onClick={handleLogout} >LOGOUT</Link>
                                 </li>
                             </ul> :
                             <ul>
