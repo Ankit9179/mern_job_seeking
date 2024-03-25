@@ -28,7 +28,9 @@ const Login = () => {
             const response = await axios.post("http://localhost:8080/api/v1/user/login", FormData, {
                 headers: { "Content-Type": "application/json" }
             })
+            //set toke in localstorage
             toast.success(`${response.data.message}`) //
+            localStorage.setItem("token", response.data.token);
             setIsAuthorized(true)
             //redirect to login page
             navigate('/')

@@ -1,0 +1,29 @@
+.how-work-container{
+    background: #cac3c3;
+    padding: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+/* h1{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+} */
+.how-work-content{
+    background: #c2b7e4;
+    width: 30%;
+    margin: 30px 0px;
+    text-align: center;
+    border-radius: 20px;
+}
+.how-work-1 h2{
+    margin: auto;
+    padding: 8px;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (min-width: 768px) {
+   
+}

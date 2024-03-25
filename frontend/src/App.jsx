@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Context } from './StateData' //state data 
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
-import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, } from 'react-router-dom'
 //imports all components
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
@@ -21,22 +21,36 @@ const App = () => {
   //state data use 
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context)
 
-  // // fetchin user with useEffect 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:8080/api/v1/user/user")
-  //       console.log(response)
-  //       setUser(response.data.user)
-  //       setIsAuthorized(true)
-  //     } catch (error) {
-  //       console.log(error.response.data.message)
-  //       setIsAuthorized(false)
-  //     }
-  //   }
-  //   fetchUser();
+  // fetchin user with useEffect 
+  useEffect(() => {
 
-  // }, [isAuthorized]);
+
+    const token = localStorage.getItem("token")
+    if (!token) {
+      toast.error("Not a user please login first")
+    } else {
+      const fetchUser = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/api/v1/user/user", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          toast.success(response.data.message)
+          setUser(response.data.user)
+          setIsAuthorized(true)
+        } catch (error) {
+          toast.error(error.response.data.message)
+          setIsAuthorized(false)
+        }
+      }
+      fetchUser();
+    }
+
+
+
+
+  }, [isAuthorized]);
 
   return (
     <>

@@ -4,9 +4,10 @@ import { userModel } from "../model/userSchema.js";
 export const isAuthorized = async (req, res, next) => {
   try {
     //get token from cookies
-    console.log(req.cookies.jwtToken);
-    const { jwtToken } = req.cookies;
-    console.log(jwtToken);
+    // console.log(req.cookies.jwtToken);
+    // const { jwtToken } = req.cookies;
+    const token = req.headers.authorization; //get token with Bearer
+    const jwtToken = token.split(" ")[1]; // token without bearer
     if (!jwtToken) {
       return res.status(400).send({
         success: false,

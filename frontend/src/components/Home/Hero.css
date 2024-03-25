@@ -1,0 +1,65 @@
+/* Hero.css */
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    /* Add additional styling as needed */
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    /* Add additional styling as needed */
+}
+
+.hero-left, .hero-right {
+    width: 100%;
+    margin: 20px;
+    /* Add additional styling as needed */
+}
+
+.hero-right img {
+    max-width: 100%;
+    margin-left: 25px;
+    height: auto;
+    /* Add additional styling as needed */
+}
+
+.hero-cart {
+    flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.hero-catr-container{
+    background: grey;
+    padding:20px;
+    width: 20%;
+    border-radius: 10px;
+    margin: 8px;
+}
+.hero-catr-container:hover{
+    background: rgb(145, 125, 125);
+    padding:20px;
+    width: 20%;
+    border-radius: 16px;
+    margin: 8px;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (min-width: 768px) {
+    .hero-content {
+        flex-direction: row;
+        
+    }
+
+    .hero-left, .hero-right {
+        width: 50%; /* Adjust as needed */
+    }
+    .hero-right img {
+        max-width: 70%;
+        margin-left: 25px;
+        height: auto;
+        /* Add additional styling as needed */
+    }
+}
