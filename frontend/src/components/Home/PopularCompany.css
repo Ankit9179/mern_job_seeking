@@ -1,0 +1,21 @@
+.popularConpanies-container{
+    background: #8a8080;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.popularConpanies-container-content{
+    border: 2px solid black;
+    width: 40%;
+    padding: 40px;border-radius: 7px;
+    background: #62c4ad;
+}
+h1{
+    text-align: center;
+}
+.popularConpanies-container-content:hover{
+    border: 2px solid black;
+    width: 40%;
+    padding: 40px;border-radius: 7px;
+    background: #b7eaf57c;
+}
