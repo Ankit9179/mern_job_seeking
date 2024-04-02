@@ -17,7 +17,7 @@ export const getAllJobFunc = async (req, res) => {
 //create job controller
 export const createJobFunc = async (req, res) => {
   try {
-    const { role } = req.user; //is't comming from auth folder for getting only role
+    const { role } = req.user; //it's comming from auth folder for getting only role
     if (role === "Job_Seeker") {
       res.status(400).send({
         success: false,
