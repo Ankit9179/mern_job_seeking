@@ -8,6 +8,7 @@ export const isAuthorized = async (req, res, next) => {
     // const { jwtToken } = req.cookies;
     const token = req.headers.authorization; //get token with Bearer
     const jwtToken = token.split(" ")[1]; // token without bearer
+    console.log(jwtToken);
     if (!jwtToken) {
       return res.status(400).send({
         success: false,

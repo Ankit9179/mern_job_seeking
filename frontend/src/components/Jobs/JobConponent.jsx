@@ -28,7 +28,7 @@ const JobConponent = () => {
                     {allJobs.jobs && allJobs.jobs.map((e) => (
                         <div key={e._id} className="bg-gray-200 border border-gray-400 w-2/5 rounded p-4 hover:shadow-lg">
                             <h3 className="text-lg font-bold">{e.title}</h3>
-                            <p>{e.discription}</p>
+                            <p>{e.description}</p>
                             <button className="bg-blue-500 text-white px-4 py-2 rounded mt-2">JOB DETAILS</button>
                         </div>
                     ))}

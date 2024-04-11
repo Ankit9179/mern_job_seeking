@@ -7,9 +7,9 @@ const jobSchema = new mongoose.Schema({
     minlength: [3, "title must contain at least 3 characters"],
     maxlength: [50, "title can not exceed 50 characters"],
   },
-  discription: {
+  description: {
     type: String,
-    required: [true, "discription is must required"],
+    required: [true, "description is must required"],
     minlength: [3, "title must contain at least 3 characters"],
     maxlength: [350, "title can not exceed 350 characters"],
   },

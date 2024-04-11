@@ -27,7 +27,7 @@ export const createJobFunc = async (req, res) => {
     //getting all fields
     const {
       title,
-      discription,
+      description,
       category,
       country,
       city,
@@ -36,7 +36,7 @@ export const createJobFunc = async (req, res) => {
       salaryFrom,
       salaryTo,
     } = req.body;
-    if (!title || !discription || !category || !country || !city || !location) {
+    if (!title || !description || !category || !country || !city || !location) {
       res.status(400).send({
         success: false,
         message: "please provide all full details",
@@ -60,7 +60,7 @@ export const createJobFunc = async (req, res) => {
     //save job in database with this variable (postedBy)
     const job = await jobModel.create({
       title,
-      discription,
+      description,
       category,
       country,
       city,
