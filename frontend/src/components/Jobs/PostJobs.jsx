@@ -127,7 +127,7 @@ const PostJobs = () => {
                             <input
                                 type="text"
                                 name="location"
-                                placeholder='Enter atleast 30 caracter'
+                                placeholder='Enter atleast 15 caracter'
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
                                 className="w-full px-3 py-2 border rounded-md border-gray-300"
