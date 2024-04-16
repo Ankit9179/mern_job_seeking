@@ -4,6 +4,7 @@ import {
   deleteJobFunc,
   getAllJobFunc,
   getMyJobsFunc,
+  singleJonInformation,
   updateJobFunc,
 } from "../controllers/jobController.js";
 import { isAuthorized } from "../auth/isAuthentication.js";
@@ -14,6 +15,8 @@ const router = express.Router();
 //routes for job
 //get all job router
 router.get("/all_jobs", getAllJobFunc);
+//single job detaile
+router.get("/single_job_information", isAuthorized, singleJonInformation);
 //job create route - use middleware isAuthorize
 router.post("/job_create", isAuthorized, createJobFunc);
 //get my jobs

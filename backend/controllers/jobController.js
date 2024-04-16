@@ -14,6 +14,21 @@ export const getAllJobFunc = async (req, res) => {
   }
 };
 
+//get single job information
+export const singleJonInformation = async (req, res) => {
+  try {
+    //getting user from req
+    const { id } = req.query;
+    //find single job info
+    const job = await jobModel.findById(id);
+    res.status(200).send({
+      success: true,
+      job,
+    });
+  } catch (error) {
+    console.log("error while finding single job informaion" + error);
+  }
+};
 //create job controller
 export const createJobFunc = async (req, res) => {
   try {
