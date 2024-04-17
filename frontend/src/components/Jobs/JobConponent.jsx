@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../../StateData';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const JobConponent = () => {
     const [allJobs, setAllJobs] = useState([]);
@@ -24,12 +25,12 @@ const JobConponent = () => {
         <>
             <div className="bg-gray-400 h-3/4 py-6">
                 <h1 className="text-center text-2xl font-bold pb-3">All Jobs</h1>
-                <div className="flex justify-around text-center">
-                    {allJobs.jobs && allJobs.jobs.map((e) => (
-                        <div key={e._id} className="bg-gray-200 border border-gray-400 w-2/5 rounded p-4 hover:shadow-lg">
-                            <h3 className="text-lg font-bold">{e.title}</h3>
-                            <p>{e.description}</p>
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded mt-2">JOB DETAILS</button>
+                <div className=" flex justify-around text-center flex-wrap">
+                    {allJobs.jobs && allJobs.jobs.map((element) => (
+                        <div key={element._id} className="bg-gray-200 border mb-10  border-gray-400 w-3/5 sm:w-2/5 rounded p-4 hover:shadow-lg">
+                            <h3 className="text-lg font-bold">{element.title}</h3>
+                            <p>{element.description}</p>
+                            <Link to={`/job/single/${element._id}`} className="bg-blue-500 text-white px-4 mt-2 rounded ">JOB DETAILS</Link>
                         </div>
                     ))}
                 </div>

@@ -63,7 +63,7 @@ const App = () => {
           <Route path='/job/getall' element={<JobConponent />} />
           <Route path='/job/post' element={<PostJobs />} />
           <Route path='/job/my' element={<Myjobs />} />
-          <Route path='/job/:id' element={<JobDetails />} />
+          <Route path='/job/single/:id' element={<JobDetails />} />
           <Route path='/applicatoin' element={<Application />} />
           <Route path='/applicatoin/my' element={<MyApplication />} />
           <Route path='*' element={<NoteFound />} />
