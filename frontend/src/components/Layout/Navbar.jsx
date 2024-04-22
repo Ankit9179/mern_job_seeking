@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { isAuthorized, setIsAuthorized } = useContext(Context);
+    const { isAuthorized, setIsAuthorized, user } = useContext(Context);
 
     const handleLogout = async () => {
         try {
@@ -34,7 +34,21 @@ const Navbar = () => {
             <div className="nav w-full flex justify-between items-center px-4 py-2">
                 <img className="nav_logo h-16" src="https://t3.ftcdn.net/jpg/03/69/72/20/360_F_369722049_bbw8XbPujH5bm5nxlYpRXcKz0DKmLC2m.jpg" alt="nav logo" />
                 {
-                    isAuthorized ?
+                    isAuthorized ? user.role === "Job_Seeker" ? <ul className="flex text-1xl text-white font-mono ">
+                        <li className="mr-4 ">
+                            <Link to='/'>HOME</Link>
+                        </li>
+                        <li className="mr-4">
+                            <Link to="/job/getall">AllJobs</Link>
+                        </li>
+                        <li className="mr-4">
+                            <Link to="/applications">Application</Link>
+                        </li>
+
+                        <li>
+                            <Link onClick={handleLogout}>Logout</Link>
+                        </li>
+                    </ul> :
                         <ul className="flex text-1xl text-white font-mono ">
                             <li className="mr-4 ">
                                 <Link to='/'>HOME</Link>
@@ -43,7 +57,7 @@ const Navbar = () => {
                                 <Link to="/job/getall">AllJobs</Link>
                             </li>
                             <li className="mr-4">
-                                <Link to="/application/my">Applications</Link>
+                                <Link to="/applications">Applications</Link>
                             </li>
                             <li className="mr-4">
                                 <Link to="/job/post">PostJob</Link>
