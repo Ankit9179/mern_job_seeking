@@ -42,7 +42,7 @@ const Navbar = () => {
                             <Link to="/job/getall">AllJobs</Link>
                         </li>
                         <li className="mr-4">
-                            <Link to="/applications">Application</Link>
+                            <Link to={`/application/${user._id}`}>Application</Link>
                         </li>
 
                         <li>
@@ -57,7 +57,7 @@ const Navbar = () => {
                                 <Link to="/job/getall">AllJobs</Link>
                             </li>
                             <li className="mr-4">
-                                <Link to="/applications">Applications</Link>
+                                <Link to="/application">Application</Link>
                             </li>
                             <li className="mr-4">
                                 <Link to="/job/post">PostJob</Link>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Context } from '../../StateData';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -86,7 +86,7 @@ const JobDetails = () => {
                             user.role === "Employer" ? (
                                 ""
                             ) : (
-                                <button className='bg-gray-500 py-1 px-3 hover:bg-gray-900 rounded-lg text-white'>APPLY NOW</button>
+                                <Link to={`/Application/${singleJob._id}`} className='bg-gray-500 py-1 px-3 hover:bg-gray-900 rounded-lg text-white'>APPLY NOW</Link>
                             )
                         }
                     </div>
