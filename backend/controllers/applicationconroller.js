@@ -148,7 +148,9 @@ export const getAllJobSeekerApplicatonsFunc = async (req, res) => {
     }
     //geting user id of user
     const { _id } = req.user;
-    const application = await applicationModel.find({ applicantId: _id });
+    const application = await applicationModel.find({
+      "applicantId.user": _id,
+    });
     res.status(200).json({
       success: true,
       application,

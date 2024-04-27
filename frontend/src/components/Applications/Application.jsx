@@ -93,10 +93,3 @@ const Application = () => {
 };
 
 export default Application;
-
-
-// // <div className='form'>
-// //                 <div className='w-5 h-5 bg-red-600 rounded-[50%] ml-2'></div>
-// //                 <div className='w-5 h-5 bg-yellow-600 rounded-[50%] ml-2'></div>
-// //                 <div className='w-5 h-5 bg-green-600 rounded-[50%] ml-2'></div>
-// //             </div>
