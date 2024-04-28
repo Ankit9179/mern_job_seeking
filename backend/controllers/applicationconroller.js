@@ -122,8 +122,7 @@ export const getAllEmployerApplicatonsFunc = async (req, res) => {
     }
     //geting user id of user
     const { _id } = req.user;
-    console.log(_id);
-    const application = await applicationModel.find({ employerId: _id });
+    const application = await applicationModel.find({ "employerId.user": _id });
     res.status(200).json({
       success: true,
       application,
