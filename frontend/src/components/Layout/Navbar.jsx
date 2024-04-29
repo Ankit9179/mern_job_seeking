@@ -30,46 +30,41 @@ const Navbar = () => {
     };
 
     return (
-        <div className="container bg-gray-900">
-            <div className="nav w-full flex justify-between items-center px-4 py-2">
-                <img className="nav_logo h-16" src="https://t3.ftcdn.net/jpg/03/69/72/20/360_F_369722049_bbw8XbPujH5bm5nxlYpRXcKz0DKmLC2m.jpg" alt="nav logo" />
+        <div className="bg-gray-900">
+            <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+                <img className="h-16" src="https://t3.ftcdn.net/jpg/03/69/72/20/360_F_369722049_bbw8XbPujH5bm5nxlYpRXcKz0DKmLC2m.jpg" alt="nav logo" />
                 {
-                    isAuthorized ? user.role === "Job_Seeker" ? <ul className="flex text-1xl text-white font-mono ">
-                        <li className="mr-4 ">
-                            <Link to='/'>HOME</Link>
-                        </li>
-                        <li className="mr-4">
-                            <Link to="/job/getall">AllJobs</Link>
-                        </li>
-                        <li className="mr-4">
-                            <Link to="/applicatoin/my">Applications</Link>
-                        </li>
-
-                        <li>
-                            <Link onClick={handleLogout}>Logout</Link>
-                        </li>
-                    </ul> :
-                        <ul className="flex text-1xl text-white font-mono ">
-                            <li className="mr-4 ">
+                    isAuthorized ? (
+                        <ul className="flex text-white font-mono ">
+                            <li className="mr-4">
                                 <Link to='/'>HOME</Link>
                             </li>
                             <li className="mr-4">
                                 <Link to="/job/getall">AllJobs</Link>
                             </li>
-                            <li className="mr-4">
-                                <Link to="/applicatoin/my">ApplicantsApplications</Link>
-                            </li>
-                            <li className="mr-4">
-                                <Link to="/job/post">PostJob</Link>
-                            </li>
-                            <li className="mr-4">
-                                <Link to="/job/my">ViewJob</Link>
-                            </li>
+                            {user.role === "Job_Seeker" ? (
+                                <li className="mr-4">
+                                    <Link to="/applicatoin/my">Applications</Link>
+                                </li>
+                            ) : (
+                                <>
+                                    <li className="mr-4">
+                                        <Link to="/applicatoin/my">ApplicantsApplications</Link>
+                                    </li>
+                                    <li className="mr-4">
+                                        <Link to="/job/post">PostJob</Link>
+                                    </li>
+                                    <li className="mr-4">
+                                        <Link to="/job/my">ViewJob</Link>
+                                    </li>
+                                </>
+                            )}
                             <li>
                                 <Link onClick={handleLogout}>Logout</Link>
                             </li>
-                        </ul> :
-                        <ul className="flex text-white ">
+                        </ul>
+                    ) : (
+                        <ul className="flex text-white">
                             <li className="mr-4 hover:text-red-600">
                                 <Link to="/login">LOGIN</Link>
                             </li>
@@ -77,6 +72,7 @@ const Navbar = () => {
                                 <Link to="/register">REGISTER</Link>
                             </li>
                         </ul>
+                    )
                 }
             </div>
         </div>
