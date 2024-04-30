@@ -99,7 +99,6 @@ export const createJobFunc = async (req, res) => {
 export const getMyJobsFunc = async (req, res) => {
   try {
     const myjobs = await jobModel.find({ postedBy: req.user._id });
-    console.log(myjobs);
     res.status(200).json({
       success: true,
       myjobs,
@@ -122,7 +121,6 @@ export const updateJobFunc = async (req, res) => {
     }
     //get id from parms
     const { id } = req.params;
-    console.log(id);
     let job = await jobModel.findById(id);
     if (!job) {
       res.status(404).json({
@@ -159,7 +157,6 @@ export const deleteJobFunc = async (req, res) => {
     }
     //get id from parms
     const { id } = req.params;
-    console.log(id);
     let job = await jobModel.findById(id);
     if (!job) {
       res.status(404).json({

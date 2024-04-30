@@ -22,7 +22,6 @@ export const createApplicationFunc = async (req, res) => {
     }
     //geting resume form
     const { resume } = req.files;
-    console.log(resume);
     const allFormats = ["image/png", "image/jpeg", "image/webp"];
     if (!allFormats.includes(resume.mimetype)) {
       res.status(400).send({

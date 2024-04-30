@@ -49,7 +49,6 @@ export const userLogin = async (req, res) => {
     }
     //verify email
     const user = await userModel.findOne({ email: email }).select("+password");
-    console.log(`${user} from here`);
     if (!user) {
       return res.status(400).send({
         success: false,
@@ -92,7 +91,10 @@ export const userLogin = async (req, res) => {
 export const userLogout = (req, res) => {
   res
     .status(201)
-    .cookie("jwtToken", "", { httpOnly: true, expires: new Date(Date.now()) })
+    .cookie("jwtToken", "", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    })
     .json({
       success: true,
       message: "user logout successfuly",
