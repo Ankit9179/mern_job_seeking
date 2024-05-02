@@ -9,7 +9,6 @@ export default defineConfig({
       "/api": {
         target: "https://mern-job-seeking-server.onrender.com",
         changeOrigin: true,
-        secure: false,
       },
     },
   },
