@@ -24,7 +24,7 @@ const Login = () => {
         e.preventDefault()
         let FormData = { email, password, role }
         try {
-            const response = await axios.post("http://localhost:8080/api/v1/user/login", FormData, {
+            const response = await axios.post("/api/v1/user/login", FormData, {
                 headers: { "Content-Type": "application/json" }
             })
             //set toke in localstorage

@@ -22,7 +22,7 @@ const Register = () => {
         e.preventDefault()
         let FormData = { name, email, password, phone, role }
         try {
-            const response = await axios.post("http://localhost:8080/api/v1/user/register", FormData)
+            const response = await axios.post("/api/v1/user/register", FormData)
             toast.success(`${response.data.message}`) //
             //redirect to login page
             navigate('/login')

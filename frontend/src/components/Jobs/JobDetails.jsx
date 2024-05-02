@@ -23,13 +23,13 @@ const JobDetails = () => {
     useEffect(() => {
         const getDataSingleJob = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/job/single_job_information/?id=${_id}`, { headers: { Authorization: `Bearer ${ltoken}` } })
+                const response = await axios.get(`/api/v1/job/single_job_information/?id=${_id}`, { headers: { Authorization: `Bearer ${ltoken}` } })
                 setSingleJob(response.data.job)
                 if (!isAuthorized) {
                     navigate('/')
                 }
             } catch (error) {
-                console.log(error)
+                toast.error(error.response.error.message)
             }
         }
         //call function

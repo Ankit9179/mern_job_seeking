@@ -1,21 +1,26 @@
 import React from 'react';
 
-const PopularCategouries = () => {
-    const num = [1, 2, 3, 4, 5, 6];
+function PopularCategories() {
     return (
-        <>
-            <h1 className='text-black text-2xl m-5 font-extrabold text-center'>POPULAR CATEGORIES</h1>
-            <div className='grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4 m-4'>
-                {num.map((i) => (
-                    <div key={i} className="bg-white shadow-md p-4 rounded-lg">
-                        <h5 className="text-xl font-bold mb-2">Card title {i}</h5>
-                        <p className="text-gray-700 mb-4">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">Go somewhere</a>
-                    </div>
-                ))}
+        <div className="container mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold text-center mb-8">Popular Categories</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg">
+                    <h2 className="text-xl font-semibold mb-4">Technology</h2>
+                    <p>Explore the latest tech jobs from software development to IT support.</p>
+                </div>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg">
+                    <h2 className="text-xl font-semibold mb-4">Mern Stack</h2>
+                    <p>The MERN stack, an acronym for MongoDB, Express.js, React.js, and Node.js, represents a powerful combination of technologies for building modern web applications.</p>
+                </div>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg hover:bg-blue-100">
+                    <h2 className="text-xl font-semibold mb-4">Design</h2>
+                    <p>Unleash your creativity in graphic design, UI/UX, and more.</p>
+                </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 
-export default PopularCategouries;
+export default PopularCategories;
+

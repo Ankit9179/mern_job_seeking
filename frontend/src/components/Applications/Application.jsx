@@ -47,11 +47,10 @@ const Application = () => {
 
         //send data to api
         try {
-            const response = await axios.post("http://localhost:8080/api/v1/application/job_seeker/create_application", formData, { headers: { Authorization: `Bearer ${ltoken}` } })
+            const response = await axios.post("/api/v1/application/job_seeker/create_application", formData, { headers: { Authorization: `Bearer ${ltoken}` } })
             toast.success(response.data.message)
             navigate('/job/getall')
         } catch (error) {
-            console.log(error)
             toast.error(error.message)
         }
     };

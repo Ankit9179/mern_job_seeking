@@ -7,12 +7,12 @@ const Footer = () => {
         <div className="fcontainer bg-gray-900 text-white py-5">
             <div className="footer flex justify-around items-center">
                 <div className="left">
-                    <ul className="flex">
-                        <li className="mr-4">home</li>
-                        <li className="mr-4">about</li>
-                        <li className="mr-4">contact</li>
-                        <li>doc.</li>
-                    </ul>
+                    <div className="flex">
+                        <a className="mr-4">home</a>
+                        <a className="mr-4">about</a>
+                        <a className=" mr-4 btn btn-hire" href="https://api.whatsapp.com/send?phone=7828092738" target="blank">contact</a>
+                        <Link className='mr-4'> doc.</Link>
+                    </div>
                 </div>
                 <div className="right flex gap-6 text-2xl">
                     <Link to='https://www.linkedin.com/in/ankit-rahi-563752258/' className="mr-4 hover:bg-yellow-500 ">

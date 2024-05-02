@@ -42,7 +42,7 @@ const PostJobs = () => {
                 setFixedSalary("")
             }
             //send data to backend
-            const response = await axios.post("http://localhost:8080/api/v1/job/job_create",
+            const response = await axios.post("/api/v1/job/job_create",
                 fixedSalary.length >= 4 ? {
                     title,
                     description,

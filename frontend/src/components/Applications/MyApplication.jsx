@@ -23,7 +23,7 @@ const MyApplication = () => {
                 if (user.role === "Job_Seeker") {
                     await axios
                         .get(
-                            "http://localhost:8080/api/v1/application/job_seeker/get_applicatons",
+                            "/api/v1/application/job_seeker/get_applicatons",
                             {
                                 headers: {
                                     Authorization: `Bearer ${ltoken}`,
@@ -40,7 +40,7 @@ const MyApplication = () => {
                     if (user.role === "Employer") {
                         await axios
                             .get(
-                                "http://localhost:8080/api/v1/application/employer/get_applicatons",
+                                "/api/v1/application/employer/get_applicatons",
                                 {
                                     headers: {
                                         Authorization: `Bearer ${ltoken}`,
@@ -67,7 +67,7 @@ const MyApplication = () => {
     const handleDeleteApplication = async (id) => {
         try {
             const response = await axios.delete(
-                `http://localhost:8080/api/v1/application/job_seeker/delete_job_application/${id}`,
+                `/api/v1/application/job_seeker/delete_job_application/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${ltoken}`,

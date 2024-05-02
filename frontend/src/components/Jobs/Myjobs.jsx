@@ -25,7 +25,7 @@ const Myjobs = () => {
         //featch my job
         const featchMyJobsData = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/v1/job/my_jobs",
+                const response = await axios.get("/api/v1/job/my_jobs",
                     { headers: { Authorization: `Bearer ${ltoken}` } }
                 )
                 setJobs(response.data.myjobs)
@@ -38,7 +38,6 @@ const Myjobs = () => {
         featchMyJobsData()
     }, [])
 
-    console.log(Jobs)
     // use isAuthorized with navigate variable
     if (!isAuthorized || user && user.role !== "Employer") {
         navigate('/')
@@ -57,7 +56,7 @@ const Myjobs = () => {
     //function for updateting job , NOTE - Jobs state variable containe multiple jobs in the form of array thats why we'r using array find method here. 
     const handleUpdateMyjob = async (jobId) => {
         const updatedJob = Jobs.find((fdJob) => fdJob._id === jobId);
-        await axios.put(`http://localhost:8080/api/v1/job/update_job/${jobId}`, updatedJob, { headers: { Authorization: `Bearer ${ltoken}` } }
+        await axios.put(`/api/v1/job/update_job/${jobId}`, updatedJob, { headers: { Authorization: `Bearer ${ltoken}` } }
         ).then((res) => {
             toast.success(res.data.message)
             setEditingMode(null);
@@ -68,7 +67,7 @@ const Myjobs = () => {
 
     //handle Delete function
     const handleDeleteMyjob = async (jobId) => {
-        await axios.delete(`http://localhost:8080/api/v1/job/delete_job/${jobId}`, { headers: { Authorization: `Bearer ${ltoken}` } }
+        await axios.delete(`/api/v1/job/delete_job/${jobId}`, { headers: { Authorization: `Bearer ${ltoken}` } }
         ).then((res) => {
             toast.success(res.data.message)
             setJobs((prevJob) => prevJob.filter((fltJob) => fltJob._id === jobId));
@@ -94,7 +93,7 @@ const Myjobs = () => {
                             {
                                 Jobs && Jobs.map((element) => (
                                     <>
-                                        <div className='container w-full flex justify-around ' key={element._id}>
+                                        <div className='container w-full md:flex pl-4 justify-around ' key={element._id}>
                                             <div className='div1'>
                                                 <span className='text-[20px] block font-bold pt-2'>Title:</span>
                                                 <input className='underline-offset-8 pb-2' type="text" disabled={editingMode !== element._id ? true : false} value={element.title} onChange={(e) => handleInputChange(element._id, "title", e.target.value)} />

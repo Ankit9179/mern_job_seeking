@@ -1,27 +1,19 @@
 import React from 'react';
 
 function HeroSection() {
-    const cardData = [1, 2, 3, 4, 5];
-
     return (
         <>
             <div className="flex flex-col">
                 <div className="flex flex-col md:flex-row">
-                    <div className="w-full md:w-1/2 m-4">
-                        <p className="text-gray-700">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. At quidem praesentium laborum aliquam rem sit accusantium est beatae laudantium tempora aspernatur, cumque repellat repudiandae illum soluta adipisci minima corporis dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, ex!
-                        </p>
+                    <div className="w-full md:w-1/2 p-2 bg bg-pik-200 bg-gren-300 text-center">
+                        <h2 className='text-[90px] font-extrabold'>WELCOME</h2>
+                        <h5 className='inline text-[55px] font-bold line-clamp-3 tracking-widest'>TO THE JOB</h5><h2 className='text-red-400 inline text-[70px] font-extrabold'>LD</h2>
+                        <p>
+                            Welcome to our job LD platform! Connecting job seekers with providers seamlessly. Browse jobs, post vacancies, and unlock endless possibilities for your career or business.</p>
                     </div>
-                    <div className="w-full md:w-1/2 m-4">
-                        <img src="hero.gif" alt="hero image" className="max-w-full mx-auto md:ml-0" />
+                    <div className="w-full md:w-1/2 my-3">
+                        <img src="hero.jpg" alt="hero image" className="max-w-full  mx-auto md:ml-0" />
                     </div>
-                </div>
-                <div className="flex flex-wrap justify-between w-full">
-                    {cardData.map((i) => (
-                        <div key={i} className="bg-gray-400 p-4 rounded-md m-2 hover:bg-gray-500">
-                            <span>cart: {i}</span>
-                        </div>
-                    ))}
                 </div>
             </div>
         </>
