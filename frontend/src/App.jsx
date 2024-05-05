@@ -20,15 +20,12 @@ import NoteFound from './components/Notefound/NotfoundComponent'
 const App = () => {
   //state data use 
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context)
+  //getting token from user localstorage
+  const token = localStorage.getItem("token")
 
   // fetchin user with useEffect 
   useEffect(() => {
-
-
-    const token = localStorage.getItem("token")
-    if (!token) {
-      toast.error("Not a user please login first")
-    } else {
+    if (token) {
       const fetchUser = async () => {
         try {
           const response = await axios.get("/api/v1/user/user", {
@@ -45,11 +42,9 @@ const App = () => {
         }
       }
       fetchUser();
+    } else {
+      toast.error("Not a user please login first")
     }
-
-
-
-
   }, [isAuthorized]);
 
   return (
@@ -65,7 +60,7 @@ const App = () => {
           <Route path='/job/my' element={<Myjobs />} />
           <Route path='/job/single/:id' element={<JobDetails />} />
           <Route path='/application/:id' element={<Application />} />
-          <Route path='/applicatoin/my' element={<MyApplication />} />
+          <Route path='/application/my' element={<MyApplication />} />
           <Route path='*' element={<NoteFound />} />
         </Routes>
         <Footer />
