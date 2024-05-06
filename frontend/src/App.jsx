@@ -33,6 +33,7 @@ const App = () => {
               'Authorization': `Bearer ${token}`
             }
           })
+          console.log(response)
           toast.success(response.data.message)
           setUser(response.data.user)
           setIsAuthorized(true)
