@@ -16,14 +16,11 @@ const JobDetails = () => {
     // use context 
     const { isAuthorized, user } = useContext(Context)
 
-    //get token from localstorage
-    const ltoken = localStorage.getItem("token")
-
     //get single job data 
     useEffect(() => {
         const getDataSingleJob = async () => {
             try {
-                const response = await axios.get(`/api/v1/job/single_job_information/?id=${_id}`, { headers: { Authorization: `Bearer ${ltoken}` } })
+                const response = await axios.get(`/api/v1/job/single_job_information/?id=${_id}`, { withCredentials: true })
                 setSingleJob(response.data.job)
                 if (!isAuthorized) {
                     navigate('/')
@@ -83,7 +80,7 @@ const JobDetails = () => {
                     </div>
                     <div className='m-3'>
                         {
-                            user.role === "Employer" ? (
+                            user === "Employer" ? (
                                 ""
                             ) : (
                                 <Link to={`/Application/${singleJob._id}`} className='bg-gray-500 py-1 px-3 hover:bg-gray-900 rounded-lg text-white'>APPLY NOW</Link>

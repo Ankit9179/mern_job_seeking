@@ -19,33 +19,25 @@ import NoteFound from './components/Notefound/NotfoundComponent'
 
 const App = () => {
   //state data use 
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context)
-  //getting token from user localstorage
-  const token = localStorage.getItem("token")
+  const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context)
 
   // fetchin user with useEffect 
   useEffect(() => {
-    if (token) {
-      const fetchUser = async () => {
-        try {
-          const response = await axios.get("/api/v1/user/user", {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          })
-          console.log(response)
-          toast.success(response.data.message)
-          setUser(response.data.user)
-          setIsAuthorized(true)
-        } catch (error) {
-          toast.error(error.response.data.message)
-          setIsAuthorized(false)
-        }
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("/api/v1/user/user", {
+          withCredentials: true
+        })
+        toast.success(response.data.message)
+        setUser(response.data.user.role)
+        setIsAuthorized(true)
+      } catch (error) {
+        toast.error(error.response.data.message)
+        setIsAuthorized(false)
       }
-      fetchUser();
-    } else {
-      toast.error("Not a user please login first")
     }
+    fetchUser();
+    // toast.error("Not a user please login first")
   }, [isAuthorized]);
 
   return (

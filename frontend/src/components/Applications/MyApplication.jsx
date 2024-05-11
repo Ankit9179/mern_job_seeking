@@ -10,8 +10,6 @@ const MyApplication = () => {
     const [openModel, setOpenModel] = useState(false);
     const [resumeUrl, setResumeUrl] = useState("");
 
-    //get token from localstorage
-    const ltoken = localStorage.getItem("token");
 
     //uset context
     const { isAuthorized, user } = useContext(Context);
@@ -20,14 +18,12 @@ const MyApplication = () => {
         //get all aplications from api
         const getAllApplications = async () => {
             try {
-                if (user.role === "Job_Seeker") {
+                if (user === "Job_Seeker") {
                     await axios
                         .get(
                             "/api/v1/application/job_seeker/get_applicatons",
                             {
-                                headers: {
-                                    Authorization: `Bearer ${ltoken}`,
-                                },
+                                withCredentials: true
                             }
                         )
                         .then((res) => {
@@ -37,14 +33,12 @@ const MyApplication = () => {
                             toast.error(err);
                         });
                 } else {
-                    if (user.role === "Employer") {
+                    if (user === "Employer") {
                         await axios
                             .get(
                                 "/api/v1/application/employer/get_applicatons",
                                 {
-                                    headers: {
-                                        Authorization: `Bearer ${ltoken}`,
-                                    },
+                                    withCredentials: true
                                 }
                             )
                             .then((res) => {
@@ -69,9 +63,7 @@ const MyApplication = () => {
             const response = await axios.delete(
                 `/api/v1/application/job_seeker/delete_job_application/${id}`,
                 {
-                    headers: {
-                        Authorization: `Bearer ${ltoken}`,
-                    },
+                    withCredentials: true
                 }
             );
             toast.success(response.data.message);
@@ -139,7 +131,7 @@ const MyApplication = () => {
                                         onClick={() => openModelFunc(element.resume.url)}
                                     />
                                 </div>
-                                {user.role === "Job_Seeker" ? (
+                                {user === "Job_Seeker" ? (
                                     <div className="button-div ">
                                         <button
                                             onClick={() => handleDeleteApplication(element._id)}

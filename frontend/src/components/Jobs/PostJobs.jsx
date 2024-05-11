@@ -24,8 +24,7 @@ const PostJobs = () => {
     const [fixedSalary, setFixedSalary] = useState("")
     const [salaryType, setSalaryType] = useState("default")
 
-    //get token from localstorage
-    const ltoken = localStorage.getItem("token")
+
 
     //handle submit 
     const handleSubmit = async (e) => {
@@ -61,7 +60,7 @@ const PostJobs = () => {
                     salaryFrom,
                     salaryTo
                 },
-                { headers: { Authorization: `Bearer ${ltoken}` } }
+                { withCredentials: true }
             )
             toast.success(response.data.message)
             navigate("/")
@@ -70,7 +69,7 @@ const PostJobs = () => {
         }
 
         //check autorize
-        if (isAuthorized || user && user.role !== "Employer") {
+        if (isAuthorized || user !== "Employer") {
             navigate('/')
         }
     }

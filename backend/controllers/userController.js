@@ -73,10 +73,10 @@ export const userLogin = async (req, res) => {
     // generate token
     const token = await user.geJwtToken();
     //save token in cookie and send
+    res.cookie("token", token);
     res.send({
       success: true,
       message: "user logdin successfully",
-      token,
     });
   } catch (error) {
     console.error(`Error while login function: ${error}`);
@@ -91,7 +91,7 @@ export const userLogin = async (req, res) => {
 export const userLogout = (req, res) => {
   res
     .status(201)
-    .cookie("jwtToken", "", {
+    .cookie("token", "", {
       httpOnly: true,
       expires: new Date(Date.now()),
     })

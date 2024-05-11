@@ -11,7 +11,7 @@ const JobConponent = () => {
     useEffect(() => {
         async function fetchAllJobsFunc() {
             try {
-                const response = await axios.get("/api/v1/job/all_jobs");
+                const response = await axios.get("/api/v1/job/all_jobs", { withCredentials: true });
                 const jobs = response.data;
                 setAllJobs(jobs);
             } catch (error) {

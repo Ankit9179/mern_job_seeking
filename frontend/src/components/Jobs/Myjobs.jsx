@@ -13,10 +13,6 @@ const Myjobs = () => {
     const { isAuthorized, user } = useContext(Context);
     const [editingMode, setEditingMode] = useState(null);
 
-    //get token from localstorage 
-    const ltoken = localStorage.getItem("token")
-
-
     // creating navigate variable 
     const navigate = useNavigate();
 
@@ -26,7 +22,7 @@ const Myjobs = () => {
         const featchMyJobsData = async () => {
             try {
                 const response = await axios.get("/api/v1/job/my_jobs",
-                    { headers: { Authorization: `Bearer ${ltoken}` } }
+                    { withCredentials: true }
                 )
                 setJobs(response.data.myjobs)
             } catch (error) {
@@ -39,13 +35,13 @@ const Myjobs = () => {
     }, [])
 
     // use isAuthorized with navigate variable
-    if (!isAuthorized || user && user.role !== "Employer") {
+    if (!isAuthorized || user !== "Employer") {
         navigate('/')
     }
 
     //function for Enable editing mode
     const handleEnableEditingMode = (jobId) => {
-        setEditingMode(jobId); //inserting job id which your are apdating
+        setEditingMode(jobId); //inserting job id which your are updating
     }
 
     //function for disable editing mode
@@ -56,7 +52,7 @@ const Myjobs = () => {
     //function for updateting job , NOTE - Jobs state variable containe multiple jobs in the form of array thats why we'r using array find method here. 
     const handleUpdateMyjob = async (jobId) => {
         const updatedJob = Jobs.find((fdJob) => fdJob._id === jobId);
-        await axios.put(`/api/v1/job/update_job/${jobId}`, updatedJob, { headers: { Authorization: `Bearer ${ltoken}` } }
+        await axios.put(`/api/v1/job/update_job/${jobId}`, updatedJob, { withCredentials: true }
         ).then((res) => {
             toast.success(res.data.message)
             setEditingMode(null);
@@ -67,12 +63,13 @@ const Myjobs = () => {
 
     //handle Delete function
     const handleDeleteMyjob = async (jobId) => {
-        await axios.delete(`/api/v1/job/delete_job/${jobId}`, { headers: { Authorization: `Bearer ${ltoken}` } }
+        await axios.delete(`/api/v1/job/delete_job/${jobId}`, { withCredentials: true }
         ).then((res) => {
             toast.success(res.data.message)
             setJobs((prevJob) => prevJob.filter((fltJob) => fltJob._id === jobId));
         }).catch((err) => {
             toast.error(err.response.data.message) /////////////////////////////////// it would be through the error
+            console.log(err)
         })
     }
 

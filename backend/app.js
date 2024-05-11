@@ -13,7 +13,16 @@ import { dbConnection } from "./database/dbConnection.js";
 const app = express();
 dotenv.config();
 //cors configuring for all foutes
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://mern-job-seeking-8rps.onrender.com",
+    ],
+    methods: ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"],
+    credentials: true,
+  })
+);
 
 //
 app.use(express.json()); // parse the json data in javascript from frontedn

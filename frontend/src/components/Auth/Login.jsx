@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
@@ -24,17 +24,16 @@ const Login = () => {
         e.preventDefault()
         let FormData = { email, password, role }
         try {
-            const response = await axios.post("/api/v1/user/login", FormData, {
-                headers: { "Content-Type": "application/json" }
-            })
+            const response = await axios.post("/api/v1/user/login", FormData, { withCredentials: true })
             //set toke in localstorage
             toast.success(`${response.data.message}`) //
-            localStorage.setItem("token", response.data.token);
             setIsAuthorized(true)
             //redirect to login page
             navigate('/')
+            return;
         } catch (error) {
             toast.error(`${error.response.data.message}`)
+            console.log(error)
         }
     }
     //check autorize

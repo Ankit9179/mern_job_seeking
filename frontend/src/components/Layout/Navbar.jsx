@@ -18,18 +18,14 @@ const Navbar = () => {
         setToggle(!toggle);
     }
 
+
+    //logout outhandler
     const handleLogout = async () => {
         try {
-            const token = localStorage.getItem("token");
-            const response = await axios.get("/api/v1/user/logout", {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+            const response = await axios.get("/api/v1/user/logout", { withCredentials: true });
             if (response.data.success === true) {
                 toast.success(response.data.message);
                 setIsAuthorized(false);
-                localStorage.removeItem("token");
                 navigate('/login');
             }
         } catch (error) {
@@ -58,14 +54,14 @@ const Navbar = () => {
                                 <li className="mr-4 hover:bg-blue-300 px-2 py-1 rounded-md">
                                     <Link to="/job/getall">AllJobs</Link>
                                 </li>
-                                {user.role === "Job_Seeker" ? (
+                                {user === "Job_Seeker" ? (
                                     <li className="mr-4 hover:bg-blue-300 px-2 py-1 rounded-md">
-                                        <Link to="/applicatoin/my">Applications</Link>
+                                        <Link to="/application/my">Applications</Link>
                                     </li>
                                 ) : (
                                     <>
                                         <li className="mr-4 hover:bg-blue-300 px-2 py-1 rounded-md">
-                                            <Link to="/applicatoin/my">ApplicantsApplications</Link>
+                                            <Link to="/application/my">ApplicantsApplications</Link>
                                         </li>
                                         <li className="mr-4 hover:bg-blue-300 px-2 py-1 rounded-md">
                                             <Link to="/job/post">PostJob</Link>

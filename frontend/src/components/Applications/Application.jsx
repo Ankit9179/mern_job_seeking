@@ -22,11 +22,6 @@ const Application = () => {
     //getting id from url ,this id is job id 
     const { id } = useParams()
 
-    //getting token 
-    const ltoken = localStorage.getItem("token")
-
-
-
     //handle file change func
     const handleFileChangeFunc = (event) => {
         const resume = event.target.files[0]
@@ -47,7 +42,7 @@ const Application = () => {
 
         //send data to api
         try {
-            const response = await axios.post("/api/v1/application/job_seeker/create_application", formData, { headers: { Authorization: `Bearer ${ltoken}` } })
+            const response = await axios.post("/api/v1/application/job_seeker/create_application", formData, { withCredentials: true })
             toast.success(response.data.message)
             navigate('/job/getall')
         } catch (error) {
