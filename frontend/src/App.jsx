@@ -16,29 +16,35 @@ import PostJobs from './components/Jobs/PostJobs'
 import Footer from './components/Layout/Footer'
 import Navbar from './components/Layout/Navbar'
 import NoteFound from './components/Notefound/NotfoundComponent'
+import Cookie from "js-cookie"
 
 const App = () => {
+
+  const token = Cookie.get("token")
+  console.log(token)
   //state data use 
   const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context)
+  if (token) {
 
-  // fetchin user with useEffect 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get("/api/v1/user/user", {
-          withCredentials: true
-        })
-        toast.success(response.data.message)
-        setUser(response.data.user.role)
-        setIsAuthorized(true)
-      } catch (error) {
-        toast.error(error.response.data.message)
-        setIsAuthorized(false)
+    // fetchin user with useEffect 
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const response = await axios.get("/api/v1/user/user", {
+            withCredentials: true
+          })
+          toast.success(response.data.message)
+          setUser(response.data.user.role)
+          setIsAuthorized(true)
+        } catch (error) {
+          toast.error(error.response.data.message)
+          setIsAuthorized(false)
+        }
       }
-    }
-    fetchUser();
-    // toast.error("Not a user please login first")
-  }, [isAuthorized]);
+      fetchUser();
+      // toast.error("Not a user please login first")
+    }, [isAuthorized]);
+  }
 
   return (
     <>
