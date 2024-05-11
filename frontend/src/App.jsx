@@ -24,7 +24,7 @@ const App = () => {
   console.log(token)
   //state data use 
   const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context)
-  if (token) {
+  if (isAuthorized) {
     // fetchin user with useEffect 
     useEffect(() => {
       const fetchUser = async () => {
@@ -42,7 +42,7 @@ const App = () => {
       }
       fetchUser();
       // toast.error("Not a user please login first")
-    }, [isAuthorized]);
+    }, []);
   } else {
     toast.error("there is no token")
   }
