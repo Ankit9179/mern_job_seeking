@@ -20,11 +20,9 @@ import Cookie from "js-cookie"
 
 const App = () => {
 
-  const token = Cookie.get("token")
-  console.log(token)
   //state data use 
   const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context)
-  if (token) {
+  if (user) {
     // fetchin user with useEffect 
     useEffect(() => {
       const fetchUser = async () => {
@@ -33,7 +31,6 @@ const App = () => {
             withCredentials: true
           })
           toast.success(response.data.message)
-          setUser(response.data.user.role)
           setIsAuthorized(true)
         } catch (error) {
           toast.error(error.response.data.message)
