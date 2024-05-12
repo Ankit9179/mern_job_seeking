@@ -73,7 +73,11 @@ export const userLogin = async (req, res) => {
     // generate token
     const token = await user.geJwtToken();
     //save token in cookie and send
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      maxAge: 15 * 24 * 60 * 60 * 1000,
+      httpOnly: true, //,prevent xss attacts cors site scripting attacks, accessable on http not with javasctrip,
+      sameSite: "strict", //csrf attacts cors site request frogery attacts
+    });
     res.send({
       success: true,
       message: "user logdin successfully",
