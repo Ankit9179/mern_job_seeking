@@ -77,6 +77,7 @@ export const userLogin = async (req, res) => {
       maxAge: 15 * 24 * 60 * 60 * 1000,
       httpOnly: true, //,prevent xss attacts cors site scripting attacks, accessable on http not with javasctrip,
       sameSite: "strict", //csrf attacts cors site request frogery attacts
+      secure: true, // Ensures cookie is only sent over HTTPS
     });
     res.send({
       success: true,
