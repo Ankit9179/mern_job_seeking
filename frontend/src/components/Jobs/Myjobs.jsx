@@ -32,12 +32,12 @@ const Myjobs = () => {
             }
         }
         featchMyJobsData()
-    }, [])
+    }, [isAuthorized])
 
-    // use isAuthorized with navigate variable
-    if (!isAuthorized || user !== "Employer") {
-        navigate('/')
-    }
+    // // use isAuthorized with navigate variable
+    // if (!isAuthorized || user !== "Employer") {
+    //     navigate('/')
+    // }
 
     //function for Enable editing mode
     const handleEnableEditingMode = (jobId) => {

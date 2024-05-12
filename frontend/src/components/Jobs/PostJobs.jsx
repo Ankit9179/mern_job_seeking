@@ -68,6 +68,7 @@ const PostJobs = () => {
             toast.error(`${error.response.data.message}`)
         }
 
+        console.log(user)
         //check autorize
         if (isAuthorized || user !== "Employer") {
             navigate('/')

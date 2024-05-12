@@ -13,7 +13,7 @@ const Login = () => {
     const [role, setRole] = useState("")
 
     //use context 
-    const { isAuthorized, setIsAuthorized } = useContext(Context)
+    const { isAuthorized, setIsAuthorized, setUser } = useContext(Context)
 
     //use navigate to navigation to home page
     const navigate = useNavigate()
@@ -28,6 +28,7 @@ const Login = () => {
             //set toke in localstorage
             toast.success(`${response.data.message}`) //
             setIsAuthorized(true)
+            setUser(response.data.user.role)
             //redirect to login page
             navigate('/')
             return;

@@ -5,13 +5,13 @@ import { FaGithub, FaLinkedin, FaInstagramSquare } from "react-icons/fa";
 const Footer = () => {
     return (
         <div className="fcontainer bg-gray-900 text-white py-5">
-            <div className="footer flex justify-around items-center">
+            <div className="flex footer  justify-around items-center">
                 <div className="left">
                     <div className="flex">
-                        <a className="mr-4">home</a>
-                        <a className="mr-4">about</a>
-                        <a className=" mr-4 btn btn-hire" href="https://api.whatsapp.com/send?phone=7828092738" target="blank">contact</a>
-                        <Link className='mr-4'> doc.</Link>
+                        <a className="mr-1 md:mr-4">home</a>
+                        <a className="mr-1 md:mr-4">about</a>
+                        <a className=" mr-1 md:mr-4 btn btn-hire" href="https://api.whatsapp.com/send?phone=7828092738" target="blank">contact</a>
+                        <Link className='mr-1 md:mr-4'> doc.</Link>
                     </div>
                 </div>
                 <div className="right flex gap-6 text-2xl">
